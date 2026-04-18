@@ -1,6 +1,7 @@
 import express, { Request, Response, NextFunction } from "express";
 import cors from "cors";
 import cookieParser from "cookie-parser";
+import router from "@/routes";
 import { ENV } from "@/config/env";
 
 const app = express();
@@ -14,6 +15,8 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+
+app.use("/api", router);
 
 // Health Check
 app.get("/", (req: Request, res: Response) => {
