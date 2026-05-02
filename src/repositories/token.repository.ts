@@ -38,4 +38,16 @@ export class TokenRepository {
       data: { consumedAt: new Date() },
     });
   }
+
+  async createRefreshToken(params: { userId: string; token: string; expiresAt: Date }) {
+    const { userId, token, expiresAt } = params;
+    return prisma.token.create({
+      data: {
+        userId,
+        token,
+        expiresAt,
+        type: TokenType.REFRESH,
+      },
+    });
+  }
 }
